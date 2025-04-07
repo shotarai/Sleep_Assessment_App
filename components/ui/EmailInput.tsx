@@ -1,4 +1,3 @@
-// components/ui/EmailInput.tsx
 import {
     Input,
     InputField,
@@ -20,7 +19,7 @@ import {
         isDisabled={false}
         isInvalid={false}
       >
-        <InputIcon as={() => <FontAwesome name="envelope" size={18} color="#999" />} pl="$3" />
+        <InputIcon as={() => <FontAwesome name="envelope" size={18} color="#999" className="pl-4" />} className="pl-2" />
         <InputField
           type="text"
           placeholder="メールアドレス"

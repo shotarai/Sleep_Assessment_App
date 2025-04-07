@@ -24,8 +24,8 @@ export default function AuthTabsLayout() {
         name="login"
         options={{
           title: 'ログイン',
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="sign-in" size={size} color={color as string} />
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <FontAwesome name="sign-in" size={size} color={color} />
           ),
         }}
       />
@@ -33,8 +33,8 @@ export default function AuthTabsLayout() {
         name="register"
         options={{
           title: '新規登録',
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="user-plus" size={size} color={color as string} />
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <FontAwesome name="user-plus" size={size} color={color} />
           ),
         }}
       />

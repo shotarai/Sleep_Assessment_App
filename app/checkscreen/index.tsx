@@ -4,20 +4,18 @@ import { Box } from "@/components/ui/box"
 import { VStack } from "@/components/ui/vstack"
 import { Heading } from "@/components/ui/heading"
 import {
-  Checkbox,
-  CheckboxIndicator,
-  CheckboxLabel,
-  CheckboxIcon,
-} from "@/components/ui/checkbox"
-import {
   Button,
   ButtonText,
 } from '@/components/ui/button';
-import { CheckIcon } from "@/components/ui/icon"
+import { Pressable } from '@/components/ui/pressable';
+import { CheckIcon } from '@/components/ui/icon';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Text } from "@/components/ui/text";
 
 export default function CheckScreen() {
   const [isChecked, setIsChecked] = useState(false);
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   const handleNext = () => {
     router.push({
@@ -27,29 +25,27 @@ export default function CheckScreen() {
   };
 
   return (
-    <Box flex={1} justifyContent="center" alignItems="center" bg="$background" px="$6">
-      <VStack space="3xl" alignItems="center" w="$full">
-        <Heading size="lg" textAlign="center" color="$textDark">
-          Ouraアプリ確認の遵守状況
-        </Heading>
+    <Box className="flex-1 bg-background px-6 pt-[40px]" style={{ paddingTop: insets.top + 40 }}>
+      <Heading className="text-center text-2xl text-text font-bold min-h-[64px]">
+        Ouraアプリ確認の有無
+      </Heading>
 
-        <Checkbox
-          size="md"
-          isChecked={isChecked}
-          onChange={() => setIsChecked(!isChecked)}
+      <VStack className="flex-1 justify-start gap-10 items-center w-full mt-12">
+        <Text className="text-text text-xl">今日はOuraアプリを確認していません</Text>
+
+        <Pressable
+          onPress={() => setIsChecked(!isChecked)}
+          className={`w-24 h-24 mt-6 rounded-full border-4 flex items-center justify-center ${isChecked ? 'bg-black border-primary-600' : 'bg-gray-200 border-gray-400'}`}
+          style={{ shadowColor: 'transparent', elevation: 0 }}
         >
-          <CheckboxIndicator mr="$2">
-            <CheckboxIcon as={CheckIcon} />
-          </CheckboxIndicator>
-          <CheckboxLabel fontSize="$md">今日はOuraアプリを確認していません</CheckboxLabel>
-        </Checkbox>
+          {isChecked && <CheckIcon className="text-white w-10 h-10" />}
+        </Pressable>
 
         <Button
           size="lg"
           action="primary"
-          borderRadius="$md"
+          className="rounded-md mt-8"
           onPress={handleNext}
-          isDisabled={!isChecked}
         >
           <ButtonText>決定</ButtonText>
         </Button>

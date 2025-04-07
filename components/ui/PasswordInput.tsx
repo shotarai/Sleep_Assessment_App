@@ -18,7 +18,7 @@ import {
         variant="rounded"
         borderColor="$primary"
       >
-        <InputIcon as={() => <FontAwesome name="lock" size={18} color="#999" />} pl="$3" />
+        <InputIcon as={() => <FontAwesome name="lock" size={18} color="#999" className="pl-5" />} className="pl-3" />
         <InputField
           type="password"
           placeholder="パスワード"

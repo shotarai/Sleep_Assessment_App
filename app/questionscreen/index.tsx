@@ -7,11 +7,13 @@ import { Text } from "@/components/ui/text";
 import { Button, ButtonText } from '@/components/ui/button';
 import { Pressable } from '@/components/ui/pressable';
 import { themeColors } from '@/components/styles/themeColors';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function QuestionScreen() {
   const router = useRouter();
   const { checked } = useLocalSearchParams();
   const isChecked = checked === 'true';
+  const insets = useSafeAreaInsets();
 
   const answers = [
     '大幅に良くなっている',
@@ -36,13 +38,13 @@ export default function QuestionScreen() {
   };
 
   return (
-    <Box flex={1} justifyContent="center" alignItems="center" bg={themeColors.background} px="$6">
-      <VStack space="$xl" w="$full">
-        <Heading size="lg" textAlign="center" color={themeColors.text} className={`mb-4`}>
-          昨日と比べて、今日の睡眠の質はどうでしたか？
-        </Heading>
+    <Box className="flex-1 bg-background px-6 pt-[35px]" style={{ paddingTop: insets.top + 35 }}>
+      <Heading className="text-center text-2xl text-text font-bold min-h-[64px]">
+        昨日と比べて{"\n"}今日の睡眠の質はどうですか？
+      </Heading>
 
-        <VStack space="$md" className={`mb-4`}>
+      <VStack className="flex-1 justify-start gap-8 items-center w-full mt-8">
+        <VStack className="gap-2 w-full">
           {answers.map((answer) => {
             const isSelected = selectedAnswer === answer;
             return (
@@ -51,7 +53,7 @@ export default function QuestionScreen() {
                 onPress={() => setSelectedAnswer(answer)}
                 className={`px-6 py-4 my-2 rounded-lg ${isSelected ? 'bg-primary-500' : 'bg-gray-200'}`}
               >
-                <Text className={isSelected ? 'text-white font-bold text-center' : 'text-black text-center'}>
+                <Text className={isSelected ? 'text-white font-bold text-center text-xl' : 'text-black text-center text-xl'}>
                   {answer}
                 </Text>
               </Pressable>
@@ -63,10 +65,10 @@ export default function QuestionScreen() {
           size="lg"
           action="primary"
           isDisabled={!selectedAnswer}
-          className={`rounded-lg`}
+          className="rounded-lg mt-2 w-1/3"
           onPress={handleNext}
         >
-          <ButtonText>決定</ButtonText>
+          <ButtonText className="text-xl">決定</ButtonText>
         </Button>
       </VStack>
     </Box>

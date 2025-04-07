@@ -19,7 +19,7 @@ export default function PrimaryButton({ label, onPress, icon, loading = false }:
       size="lg"
       variant="solid"
       action="primary"
-      borderRadius="$md"
+      className="rounded-md"
       onPress={onPress}
       isDisabled={loading}
     >

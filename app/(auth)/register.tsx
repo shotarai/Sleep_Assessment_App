@@ -1,4 +1,3 @@
-// app/(auth)/register.tsx
 import React, { useState } from 'react';
 import {
   Alert,
@@ -46,9 +45,9 @@ export default function RegisterScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={{ flex: 1 }}
     >
-      <Box flex={1} justifyContent="center" px="$6" bg="$background">
-        <VStack space="lg">
-          <Heading size="xl" textAlign="center" color="$textDark">
+      <Box className="flex-1 justify-center px-6 bg-background">
+        <VStack className="gap-6">
+          <Heading className="text-center text-2xl text-text font-bold">
             新規登録
           </Heading>
 
