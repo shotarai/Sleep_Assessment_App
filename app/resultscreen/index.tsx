@@ -20,6 +20,7 @@ export default function ResultScreen() {
   const insets = useSafeAreaInsets();
   const [isLoading, setIsLoading] = useState(false);
 
+  const userEmail = auth.currentUser?.email || "unknown@example.com";
   const checkText = isChecked ? 'Ouraアプリの確認をしていない' : 'Ouraアプリを確認してしまった';
   const sleepText = sleepQuality ? `睡眠の質：「${sleepQuality}」` : '睡眠の質は未入力です';
 
@@ -58,7 +59,11 @@ export default function ResultScreen() {
         今日の結果
       </Heading>
 
-      <VStack className="flex-1 justify-start gap-10 items-center w-full mt-16">
+      <VStack className="flex-1 justify-start gap-10 items-center w-full mt-12">
+        <Box className="flex-row justify-left items-center w-full px-2 border-b border-gray-300 pb-2">
+          <Text className="text-xl text-text">{userEmail} さん</Text>
+        </Box>
+
         <VStack className="gap-4 w-full">
           <Box className="flex-row justify-between items-center w-full px-2">
             <Text className="text-xl text-text">{checkText}</Text>
@@ -91,7 +96,7 @@ export default function ResultScreen() {
           {isLoading ? (
             <ActivityIndicator size="small" color="#fff" />
           ) : (
-            <ButtonText className="text-xl">データを送信する</ButtonText>
+            <ButtonText className="text-xl">データを送信</ButtonText>
           )}
         </Button>
       </VStack>
