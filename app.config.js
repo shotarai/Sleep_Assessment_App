@@ -44,6 +44,7 @@ export default {
         },
       ],
       'expo-font',
+      'expo-web-browser',
     ],
     extra: {
       apiKey: process.env.API_KEY,

@@ -7,7 +7,11 @@ import {
   Button,
   ButtonText,
 } from '@/components/ui/button';
-import { Pressable } from '@/components/ui/pressable';
+import {
+  Checkbox,
+  CheckboxIndicator,
+  CheckboxIcon,
+} from '@/components/ui/checkbox';
 import { CheckIcon } from '@/components/ui/icon';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text } from "@/components/ui/text";
@@ -33,13 +37,17 @@ export default function CheckScreen() {
       <VStack className="flex-1 justify-start gap-10 items-center w-full mt-12">
         <Text className="text-text text-xl">今日はOuraアプリを確認していません</Text>
 
-        <Pressable
-          onPress={() => setIsChecked(!isChecked)}
-          className={`w-24 h-24 mt-6 rounded-full border-4 flex items-center justify-center ${isChecked ? 'bg-black border-primary-600' : 'bg-gray-200 border-gray-400'}`}
-          style={{ shadowColor: 'transparent', elevation: 0 }}
+        <Checkbox
+          value="checked"
+          isChecked={isChecked}
+          onChange={() => setIsChecked(!isChecked)}
+          size="lg"
+          className="mt-6"
         >
-          {isChecked && <CheckIcon className="text-white w-10 h-10" />}
-        </Pressable>
+          <CheckboxIndicator className="w-24 h-24 rounded-full">
+            <CheckboxIcon as={CheckIcon} className="w-12 h-12" />
+          </CheckboxIndicator>
+        </Checkbox>
 
         <Button
           size="lg"
