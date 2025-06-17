@@ -15,14 +15,15 @@ import { ActivityIndicator } from 'react-native';
 
 export default function ResultScreen() {
   const router = useRouter();
-  const { checked, sleepQuality } = useLocalSearchParams();
+  const { checked, relativeSleepQuality, absoluteSleepQuality } = useLocalSearchParams();
   const isChecked = checked === 'true';
   const insets = useSafeAreaInsets();
   const [isLoading, setIsLoading] = useState(false);
 
   const userEmail = auth.currentUser?.email || "unknown@example.com";
   const checkText = isChecked ? 'Ouraアプリの確認をしていない' : 'Ouraアプリを確認してしまった';
-  const sleepText = sleepQuality ? `睡眠の質：「${sleepQuality}」` : '睡眠の質は未入力です';
+  const relativeSleepText = relativeSleepQuality ? `相対的睡眠の質：「${relativeSleepQuality}」` : '相対的睡眠の質は未入力です';
+  const absoluteSleepText = absoluteSleepQuality ? `絶対的睡眠の質：「${absoluteSleepQuality}」` : '絶対的睡眠の質は未入力です';
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -39,7 +40,8 @@ export default function ResultScreen() {
         Ouraアプリ: checkText ?? "未入力",
       },
       question: {
-        解答: sleepQuality ?? "未入力",
+        相対的睡眠の質: relativeSleepQuality ?? "未入力",
+        絶対的睡眠の質: absoluteSleepQuality ?? "未入力",
       },
     };
     const currentUserEmail = auth.currentUser?.email || "unknown";
@@ -76,9 +78,19 @@ export default function ResultScreen() {
           </Box>
 
           <Box className="flex-row justify-between items-center w-full px-2">
-            <Text className="text-xl text-text">{sleepText}</Text>
+            <Text className="text-xl text-text">{relativeSleepText}</Text>
             <Pressable
-              onPress={() => router.push(`/questionscreen?checked=${checked}`)}
+              onPress={() => router.push(`/relativescreen?checked=${checked}&relativeSleepQuality=${relativeSleepQuality}`)}
+              className="p-2"
+            >
+              <AntDesign name="edit" size={20} color={themeColors.text} />
+            </Pressable>
+          </Box>
+
+          <Box className="flex-row justify-between items-center w-full px-2">
+            <Text className="text-xl text-text">{absoluteSleepText}</Text>
+            <Pressable
+              onPress={() => router.push(`/absolutescreen?checked=${checked}&relativeSleepQuality=${relativeSleepQuality}&absoluteSleepQuality=${absoluteSleepQuality}`)}
               className="p-2"
             >
               <AntDesign name="edit" size={20} color={themeColors.text} />

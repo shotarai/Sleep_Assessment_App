@@ -31,9 +31,16 @@ export default {
     experiments: {
       typedRoutes: true,
     },
+    updates: {
+      url: `https://u.expo.dev/${process.env.EAS_PROJECT_ID}`
+    },
+    runtimeVersion: {
+      policy: "appVersion"
+    },
     plugins: [
       'expo-router',
       'expo-asset',
+      'expo-updates',
       [
         'expo-splash-screen',
         {
@@ -47,6 +54,9 @@ export default {
       'expo-web-browser',
     ],
     extra: {
+      eas: {
+        projectId: process.env.EAS_PROJECT_ID
+      },
       apiKey: process.env.API_KEY,
       authDomain: process.env.AUTH_DOMAIN,
       projectId: process.env.PROJECT_ID,

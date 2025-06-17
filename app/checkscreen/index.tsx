@@ -23,7 +23,7 @@ export default function CheckScreen() {
 
   const handleNext = () => {
     router.push({
-      pathname: '/questionscreen',
+      pathname: '/relativescreen',
       params: { checked: String(isChecked) },
     });
   };

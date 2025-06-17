@@ -11,27 +11,29 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function QuestionScreen() {
   const router = useRouter();
-  const { checked } = useLocalSearchParams();
+  const { checked, relativeSleepQuality } = useLocalSearchParams();
   const isChecked = checked === 'true';
   const insets = useSafeAreaInsets();
 
   const answers = [
     '大幅に良くなっている',
-    'やや良くなっている',
+    '良くなっている',
     '変わらない',
-    'やや悪くなっている',
+    '悪くなっている',
     '大幅に悪くなっている',
   ];
 
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(
+    (relativeSleepQuality as string) || null
+  );
 
   const handleNext = () => {
     if (selectedAnswer) {
       router.push({
-        pathname: '/resultscreen',
+        pathname: '/absolutescreen',
         params: {
           checked: String(isChecked),
-          sleepQuality: selectedAnswer,
+          relativeSleepQuality: selectedAnswer,
         },
       });
     }
@@ -40,7 +42,7 @@ export default function QuestionScreen() {
   return (
     <Box className="flex-1 bg-background px-6 pt-[35px]" style={{ paddingTop: insets.top + 35 }}>
       <Heading className="text-center text-2xl text-text font-bold min-h-[64px]">
-        昨日と比べて{"\n"}今日の睡眠の質はどうですか？
+        昨日と比べて{"\n"}今日の睡眠の質を評価してください
       </Heading>
 
       <VStack className="flex-1 justify-start gap-8 items-center w-full mt-8">
